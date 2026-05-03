@@ -11,12 +11,8 @@ Local-First Design: Opted for a docker-compose approach to satisfy the JD's requ
 
 Documentation as Code: Added a docs/ folder and compliance_standard.md early. In a government role (BA2), the "Why" (regulatory logic) is often more important than the "How" (code).
 
-Challenges
+Challenges: Synthesizing the folder structure to be both "GitHub-ready" for recruiters and "Airflow-ready" for the local runtime environment. Solved by placing the dags/ folder at the root for easy volume mounting.
 
-Synthesizing the folder structure to be both "GitHub-ready" for recruiters and "Airflow-ready" for the local runtime environment. Solved by placing the dags/ folder at the root for easy volume mounting.
-
-Impact:
-
-Established a professional workspace that satisfies JD requirements for Data Governance and Metadata Management by creating dedicated spaces for configurations and schemas.
+Impact: Established a professional workspace that satisfies JD requirements for Data Governance and Metadata Management by creating dedicated spaces for configurations and schemas.
 
 Day 2: TBD
