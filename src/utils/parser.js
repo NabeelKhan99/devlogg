@@ -1,19 +1,25 @@
 // src/utils/parser.js
-
 export const parseLogContent = (content, projectId) => {
-  // FIX: If 'content' is a Vite module object, get the string from .default
-  const rawText = typeof content === 'string' ? content : content.default || "";
+  let rawText = content;
 
-  if (!rawText || typeof rawText !== 'string') {
-    console.error(`Parser received invalid content for ${projectId}:`, content);
-    return [];
+  // If Vite encoded it as a Data URI, we must decode it
+  if (typeof content === 'string' && content.startsWith('data:text/plain;base64,')) {
+    try {
+      // atob() decodes base64 strings
+      rawText = atob(content.split(',')[1]);
+    } catch (e) {
+      console.error("Decoding failed", e);
+    }
   }
 
-  // Now .split() will definitely work because rawText is a string
+  // Ensure we have a valid string before splitting
+  if (!rawText || typeof rawText !== 'string') return [];
+
   const entries = rawText.split(/(?=Day \d+\s*[:])/gi).filter(Boolean);
   
   return entries.map((entry, index) => {
     const lines = entry.trim().split(/\r?\n/);
+    // ... rest of your existing mapping logic
     const title = lines[0]?.trim() || `Log ${index + 1}`;
     
     const descStartIndex = lines.findIndex(line => line.toLowerCase().includes('desc ::'));
