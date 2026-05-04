@@ -15,4 +15,24 @@ Challenges: Synthesizing the folder structure to be both "GitHub-ready" for recr
 
 Impact: Established a professional workspace that satisfies JD requirements for Data Governance and Metadata Management by creating dedicated spaces for configurations and schemas.
 
-Day 2: TBD
+Day 2: Creating a Docker container for Manitoba Integrated Petro Warehouse (MB-PIW)
+
+Desc:: 
+
+Decisions:
+
+Containerized Architecture: Implemented a multi-service Docker Compose setup using PostgreSQL and Apache Airflow. This mirrors a real-world data platform where orchestration and storage are decoupled but tightly integrated.
+
+Local-First Execution: Chose Docker over cloud deployment to align with the JD’s emphasis on hands-on tooling and to ensure the entire system can be run locally by recruiters without external dependencies or credentials.
+
+Externalized Configuration: Introduced a .env file to manage database credentials and runtime settings. This supports environment portability and aligns with best practices for configuration management and security.
+
+Persistent Storage Strategy: Added Docker volumes for PostgreSQL and Airflow logs to ensure data durability across container restarts, which is critical for auditability and reproducibility in regulated environments.
+
+Challenges:
+
+Ensuring reliable communication between Airflow and PostgreSQL during container startup. Initial runs may fail due to service readiness timing issues. Addressed by using depends_on and validating connections through logs, while accepting that production systems would require more robust health checks.
+
+Impact:
+
+Established a reproducible, production-aligned infrastructure that supports workflow orchestration, persistent storage, and external tool integration (e.g., Tableau). This directly satisfies JD requirements around automation frameworks and system reliability, while laying the foundation for implementing governed, analytics-ready data pipelines.
